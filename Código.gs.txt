@@ -1,0 +1,102 @@
+// Substitua pelo ID da sua planilha (está na URL entre /d/ e /edit)
+const SPREADSHEET_ID = "10a45h_2Q61vukwukcS6VzG7mGLPV7nlGnyv8H51763w"; // Lembre-se de colocar o seu ID
+
+function doPost(e) {
+  try {
+    const sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName("CADASTRO");
+    const payload = JSON.parse(e.postData.contents);
+    
+    const acao = payload.acao; 
+    const dados = payload.dados;
+
+    // AÇÃO: SALVAR INADIMPLÊNCIA RAPIDAMENTE
+    if (acao === 'atualizarInadimplencia') {
+      const data = sheet.getDataRange().getValues();
+      for (let i = 1; i < data.length; i++) {
+        if (data[i][0] == dados.codigo) {
+          const linha = i + 1;
+          // Atualiza apenas a 17ª coluna (Inadimplente)
+          sheet.getRange(linha, 17).setValue(dados.inadimplente);
+          return ContentService.createTextOutput("Inadimplência atualizada com sucesso").setMimeType(ContentService.MimeType.TEXT);
+        }
+      }
+      return ContentService.createTextOutput("Erro: Código não encontrado").setMimeType(ContentService.MimeType.TEXT);
+    }
+
+    // AÇÃO: DELETAR
+    if (acao === 'deletar') {
+      const data = sheet.getDataRange().getValues();
+      for (let i = 1; i < data.length; i++) {
+        if (data[i][0] == dados.codigo) { 
+          sheet.deleteRow(i + 1); 
+          return ContentService.createTextOutput("Deletado com sucesso").setMimeType(ContentService.MimeType.TEXT);
+        }
+      }
+      return ContentService.createTextOutput("Erro: Código não encontrado").setMimeType(ContentService.MimeType.TEXT);
+    }
+
+    // AÇÃO: ATUALIZAR
+    if (acao === 'atualizar') {
+      const data = sheet.getDataRange().getValues();
+      for (let i = 1; i < data.length; i++) {
+        if (data[i][0] == dados.codigo) {
+          const linha = i + 1;
+          const novaLinha = [
+            dados.codigo, dados.cliente, dados.tipoDoc, dados.documento,
+            dados.nomeFantasia, dados.equipamento, dados.tipoContrato,
+            dados.endereco, dados.franquia, dados.contato, dados.telefone,
+            dados.dataRenovacao, dados.cancelamento, dados.comprovantes,
+            dados.tipoCobranca || "", 
+            dados.status || "",
+            data[i][16] || "" // Mantém o status de Inadimplente que já estava na planilha!
+          ];
+          sheet.getRange(linha, 1, 1, novaLinha.length).setValues([novaLinha]);
+          return ContentService.createTextOutput("Atualizado com sucesso").setMimeType(ContentService.MimeType.TEXT);
+        }
+      }
+    }
+
+    // AÇÃO: INSERIR (Com trava de duplicidade)
+    if (acao === 'inserir') {
+      const data = sheet.getDataRange().getValues();
+      
+      // Verifica se o código já existe na Coluna A
+      for (let i = 1; i < data.length; i++) {
+        if (data[i][0] == dados.codigo) {
+          return ContentService.createTextOutput("Erro: Este CÓDIGO já está cadastrado.").setMimeType(ContentService.MimeType.TEXT);
+        }
+      }
+
+      // Se não encontrou duplicado, insere normalmente
+      sheet.appendRow([
+        dados.codigo, dados.cliente, dados.tipoDoc, dados.documento,
+        dados.nomeFantasia, dados.equipamento, dados.tipoContrato,
+        dados.endereco, dados.franquia, dados.contato, dados.telefone,
+        dados.dataRenovacao, dados.cancelamento, dados.comprovantes,
+        dados.tipoCobranca || "", 
+        dados.status || "",
+        "" // Coluna Inadimplente inicia vazia
+      ]);
+      return ContentService.createTextOutput("Inserido com sucesso").setMimeType(ContentService.MimeType.TEXT);
+    }
+
+    return ContentService.createTextOutput("Ação inválida").setMimeType(ContentService.MimeType.TEXT);
+
+  } catch (error) {
+    return ContentService.createTextOutput("Erro: " + error.toString()).setMimeType(ContentService.MimeType.TEXT);
+  }
+}
+
+function doGet() {
+  const sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName("CADASTRO");
+  const values = sheet.getDataRange().getValues();
+  const headers = values.shift(); 
+  
+  const json = values.map(row => {
+    let obj = {};
+    headers.forEach((header, i) => obj[header] = row[i]);
+    return obj;
+  });
+  
+  return ContentService.createTextOutput(JSON.stringify(json)).setMimeType(ContentService.MimeType.JSON);
+}
