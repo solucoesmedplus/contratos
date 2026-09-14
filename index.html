@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0f3343">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>Med Plus+ | Gestão de Contratos</title>
+    <link rel="shortcut icon" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjoAWfc_MdJ1u6ZR9tQUKGc0flOXPwWd7W424PEuyD8nzSX72a4gKdBx7ywmA_iMsF50xeXEaiURC6f0crnE1lzWB6XzFCXBMzzi_GTGUg09qhItoHz6hdwogG9UDO46VfgyG0dYpbAZIuYSviGlVnCsHiTZZightYwq7ewpnw3WnuPGbjd1-0ajWRUBwCU/w400-h400/favicon-medplus.webp" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Camada de Carregamento -->
+    <div id="preloader" aria-hidden="true">
+        <div class="loader-content">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgywsdWKH6rlDURrDoENalBtkXnhxike5bP4lesilVl-vBhsPrYmIIDLESb8VpR1e6AcRyxgXcyW8snNH4tSyIaJmTizACfOeqQYUjoaXhPE0MmMlHigietjYjKFLpEx5lccR3l10Q5RBwQMNBG8ENz6rAsMubobIyLRZa5DOLpWFtkMEH0Bx8_2LPVZFmb/s16000/logotipo-med-plus2025-1.png" alt="Logo Med Plus+">
+            <div class="spinner"></div>
+            <p>Carregando sistema...</p>
+        </div>
+    </div>
+
+    <div class="bg-image" aria-hidden="true"></div>
+    <div class="bg-glow bg-glow-one" aria-hidden="true"></div>
+    <div class="bg-glow bg-glow-two" aria-hidden="true"></div>
+
+    <main class="app-shell">
+        <header class="app-topbar">
+            <div class="brand-lockup">
+                <div class="brand-mark">M+</div>
+                <div class="brand-copy">
+                    <strong>Med Plus+</strong>
+                    <span>Gestão interna</span>
+                </div>
+            </div>
+            <div class="app-status">
+                <span class="status-dot"></span>
+                Sistema ativo
+            </div>
+        </header>
+
+        <section class="home-container" aria-labelledby="tituloPrincipal">
+            <div class="hero-copy">
+                <span class="eyebrow">CENTRAL DE CONTRATOS</span>
+                <h1 id="tituloPrincipal" class="logo-text">Gestão de Contratos</h1>
+                <p class="subtitle">Consulte, cadastre e mantenha os contratos dos clientes em um só lugar.</p>
+            </div>
+
+            <div class="action-buttons">
+                <button class="app-action app-action-primary" type="button" onclick="openModal('modalPesquisa')">
+                    <span class="action-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                    </span>
+                    <span class="action-copy">
+                        <strong>Pesquisar contratos</strong>
+                        <small>Localize clientes, equipamentos e contratos</small>
+                    </span>
+                    <span class="action-chevron" aria-hidden="true">›</span>
+                </button>
+
+                <button class="app-action" type="button" onclick="openModal('modalCadastro')">
+                    <span class="action-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/></svg>
+                    </span>
+                    <span class="action-copy">
+                        <strong>Novo cadastro</strong>
+                        <small>Registre um novo cliente ou contrato</small>
+                    </span>
+                    <span class="action-chevron" aria-hidden="true">›</span>
+                </button>
+            </div>
+
+            <div class="home-footer-note">
+                <span class="privacy-icon" aria-hidden="true">✓</span>
+                Dados gerenciados pela sua base atual
+            </div>
+        </section>
+    </main>
+
+    <nav class="mobile-tabbar" aria-label="Navegação principal">
+        <button type="button" class="tabbar-item active" onclick="closeAllModals()">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20H4v-9.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 20v-6h6v6" stroke="currentColor" stroke-width="1.8"/></svg>
+            <span>Início</span>
+        </button>
+        <button type="button" class="tabbar-item" onclick="openModal('modalPesquisa')">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <span>Pesquisar</span>
+        </button>
+        <button type="button" class="tabbar-item" onclick="openModal('modalCadastro')">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.5"/></svg>
+            <span>Novo</span>
+        </button>
+    </nav>
+
+    <!-- MODAL CADASTRO -->
+    <div id="modalCadastro" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="tituloModalCadastro">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title-group">
+                    <span class="modal-kicker">CONTRATOS</span>
+                    <h2 id="tituloModalCadastro">Cadastro de Cliente</h2>
+                </div>
+                <button class="close-btn" type="button" onclick="closeModal('modalCadastro')" aria-label="Fechar cadastro">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <form id="formCadastro">
+                    <div class="input-group">
+                        <label for="cadCodigo">Código do Cliente</label>
+                        <input type="text" id="cadCodigo" readonly class="readonly-input" aria-readonly="true">
+                        <small class="field-help">Gerado automaticamente</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="cadCliente">Cliente</label>
+                        <input type="text" id="cadCliente" required placeholder="Nome completo ou Razão Social" autocomplete="organization">
+                    </div>
+
+                    <div class="radio-group" role="radiogroup" aria-label="Tipo de documento">
+                        <label><input type="radio" name="tipoDoc" value="CNPJ" checked onchange="toggleDocType()"> <span>CNPJ</span></label>
+                        <label><input type="radio" name="tipoDoc" value="CPF" onchange="toggleDocType()"> <span>CPF</span></label>
+                    </div>
+
+                    <div class="input-group">
+                        <label id="lblDoc" for="cadDoc">CNPJ</label>
+                        <input type="text" id="cadDoc" required placeholder="00.000.000/0000-00" oninput="maskDoc(this)" inputmode="numeric">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="cadFantasia">Nome Fantasia</label>
+                        <input type="text" id="cadFantasia" autocomplete="organization">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="cadEquipamento">Equipamento</label>
+                        <input type="text" id="cadEquipamento" required placeholder="Ex.: CR30-X, Drystar...">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="cadTipoContrato">Tipo de Contrato</label>
+                        <select id="cadTipoContrato" required>
+                            <option value="">Selecione...</option>
+                            <option value="COMPLETO">COMPLETO</option>
+                            <option value="CONTRATO M.O">CONTRATO M.O</option>
+                            <option value="IMPRESSORA FRANQUIA 200fls">IMPRESSORA FRANQUIA 200fls</option>
+                            <option value="IMPRESSORA FRANQUIA 300fls">IMPRESSORA FRANQUIA 300fls</option>
+                            <option value="LOCAÇÃO CR DX-M E NOBREAK">LOCAÇÃO CR DX-M E NOBREAK</option>
+                            <option value="LOCAÇÃO DO SISTEMA PACS">LOCAÇÃO DO SISTEMA PACS</option>
+                            <option value="LOCAÇÃO DR">LOCAÇÃO DR</option>
+                            <option value="LOCAÇÃO DR (USADA)">LOCAÇÃO DR (USADA)</option>
+                            <option value="LOCAÇÃO APARARELHO DE RX">LOCAÇÃO APARARELHO DE RX</option>
+                            <option value="M.O PARCIAL PEÇAS">M.O PARCIAL PEÇAS</option>
+                            <option value="PLUS">PLUS</option>
+                            <option value="PREVENTIVA">PREVENTIVA</option>
+                            <option value="SISTEMA PACS">SISTEMA PACS</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group input-span-2">
+                        <label for="cadEndereco">Endereço de Instalação</label>
+                        <input type="text" id="cadEndereco" required autocomplete="street-address">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="cadFranquia">Franquia / Mês</label>
+                        <input type="text" id="cadFranquia">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="cadContato">Contato</label>
+                        <input type="text" id="cadContato" required placeholder="Nome do contato" autocomplete="name">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="cadTelefone">Telefone</label>
+                        <input type="tel" id="cadTelefone" required placeholder="(00) 00000-0000" oninput="maskPhone(this)" maxlength="15" inputmode="tel" autocomplete="tel">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="cadDataRenovacao">Data para Renovação</label>
+                        <input type="date" id="cadDataRenovacao" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="cadCancelamento">Cancelamento</label>
+                        <input type="date" id="cadCancelamento">
+                    </div>
+
+                    <div class="input-group input-span-2">
+                        <label for="cadComprovantes">Comprovantes</label>
+                        <input type="text" id="cadComprovantes" placeholder="Link do Drive ou caminho">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="cadTipoCobranca">Tipo de Cobrança</label>
+                        <select id="cadTipoCobranca">
+                            <option value="">Selecione...</option>
+                            <option value="FRANQUIA MENSAL/EXCETENTE">FRANQUIA MENSAL/EXCETENTE</option>
+                            <option value="MENSAL">MENSAL</option>
+                            <option value="POR EXAME">POR EXAME</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="cadStatus">Status</label>
+                        <select id="cadStatus">
+                            <option value="">Selecione...</option>
+                            <option value="Ativo">Ativo</option>
+                            <option value="Cancelado">Cancelado</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn-futuristic btn-secondary" onclick="limparCadastro()">
+                    <span class="btn-text">Limpar</span>
+                </button>
+                <button type="button" class="btn-futuristic" onclick="salvarCadastro(event)">
+                    <span class="btn-text">Cadastrar</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL PESQUISA -->
+    <div id="modalPesquisa" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="tituloModalPesquisa">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <div class="modal-title-group">
+                    <span class="modal-kicker">CONSULTA</span>
+                    <h2 id="tituloModalPesquisa">Pesquisa de Contratos</h2>
+                </div>
+                <button class="close-btn" type="button" onclick="closeModal('modalPesquisa')" aria-label="Fechar pesquisa">&times;</button>
+            </div>
+
+            <div class="modal-body search-layout">
+                <div class="search-header">
+                    <div class="search-filters">
+                        <div class="input-group search-input-group">
+                            <label for="termoPesquisa">Pesquisar em todos os campos</label>
+                            <div class="search-bar-wrapper">
+                                <span class="search-input-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                                </span>
+                                <input type="search" id="termoPesquisa" placeholder="Cliente, CNPJ, equipamento..." oninput="maskPesquisa(this)" autocomplete="off">
+                                <button type="button" class="clear-search-btn" onclick="limparPesquisa()" title="Limpar pesquisa" aria-label="Limpar pesquisa">&times;</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="search-tip">No celular, cada contrato é exibido como um card para facilitar a leitura.</div>
+                </div>
+
+                <div class="search-results">
+                    <div class="table-wrapper">
+                        <table class="futuristic-table">
+                            <thead>
+                                <tr>
+                                    <th>AÇÕES</th>
+                                    <th class="sortable" onclick="ordenarTabela(this, 'CÓDIGO')">CÓDIGO</th>
+                                    <th class="sortable" onclick="ordenarTabela(this, 'CLIENTE')">CLIENTE</th>
+                                    <th class="sortable" onclick="ordenarTabela(this, 'DOCUMENTO')">DOCUMENTO</th>
+                                    <th class="sortable" onclick="ordenarTabela(this, 'NOME_FANTASIA')">NOME FANTASIA</th>
+                                    <th class="sortable" onclick="ordenarTabela(this, 'EQUIPAMENTO')">EQUIPAMENTO</th>
+                                    <th class="sortable" onclick="ordenarTabela(this, 'TIPO_CONTRATO')">TIPO CONTRATO</th>
+                                    <th class="sortable" onclick="ordenarTabela(this, 'ENDERECO_INSTALACAO')">ENDEREÇO INSTALAÇÃO</th>
+                                    <th class="sortable" onclick="ordenarTabela(this, 'FRANQUIA_MES')">FRANQUIA / MÊS</th>
+                                    <th class="sortable" onclick="ordenarTabela(this, 'CONTATO')">CONTATO</th>
+                                    <th class="sortable" onclick="ordenarTabela(this, 'TELEFONE')">TELEFONE</th>
+                                    <th class="sortable" onclick="ordenarTabela(this, 'DATA_RENOVACAO')">RENOVAÇÃO</th>
+                                    <th class="sortable" onclick="ordenarTabela(this, 'CANCELAMENTO')">CANCELAMENTO</th>
+                                    <th class="sortable" onclick="ordenarTabela(this, 'COMPROVANTES')">COMPROVANTES</th>
+                                    <th class="sortable" onclick="ordenarTabela(this, 'TIPO_COBRANCA')">TIPO COBRANÇA</th>
+                                    <th class="sortable" onclick="ordenarTabela(this, 'STATUS')">STATUS</th>
+                                    <th>INADIMPLENTE</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabelaResultados"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
